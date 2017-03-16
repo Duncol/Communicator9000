@@ -1,5 +1,6 @@
 # Communicator9000
 <b>PROGRAM - AS WELL AS THIS README FILE - IS STILL UNDER CONSTRUCTION</b>
+
 <b>TO-DO LIST:</b>
  - refactoring
  - debugging
@@ -15,5 +16,5 @@ Login client itself contains "login" field, "password" field, "login" button and
 
 <b>RUNTIME</b>
 
-Client verifies user's credentials (login and opassword) and can create new user in server-side db via RMI. Only after this verification chat window is made, which connects to server side with a standard Java Socket/ServerSocket. Afterwards, new thread awaiting for new messages is initialized and a similar one - that sends new messages to all clients - starts running on the server side.
-Client's chat window sends messages with a simple ActionListener when "Send" button is pressed. Message - along with sender's ures name - goes to the server, where current time is appended. After that, server sends the message to all current users (user list is a static field with global access. That provides an up-to-date state when server-side sends a new message.
+Client login window verifies user's credentials (login and password) and can create new user in server-side db - both are managed by RMI. Only after this verification chat window is made, which connects to server side with a standard Java Socket/ServerSocket. Afterwards, new thread awaiting for new messages is initialized (BufferedReader) and a similar one - that sends new messages from that client to all clients - starts running on the server side.
+Client's chat window sends messages with a simple ActionListener when "Send" button is pressed. Message - along with sender's user name - goes to the server, where current time is appended. After that, server sends the message to all current users (user list is a static field with global access. That provides an up-to-date state when server-side sends a new message. When message is delivered via reader it is immediately appended to JTextArea.
