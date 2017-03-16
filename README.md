@@ -4,6 +4,8 @@
  - refactoring
  - debugging
  - implementation of few additional features (more complex layout in GUI, other rooms, maybe file attachment option)
+ 
+ <hr>
 
 Simple chat viewed with Swing, working with a simple server. Server logic uses derby db (jdbc) for user and password storage/verification. Client invokes server logic via RMI and uses the outcome.
 
