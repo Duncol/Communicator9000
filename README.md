@@ -1,5 +1,5 @@
 # Communicator9000
-<b>UNDER CONSTRUCTION</b>
+<b>PROGRAM - AS WELL AS THIS README FILE - IS STILL UNDER CONSTRUCTION</b>
 
 Simple chat viewed with Swing, working with a simple server. Server logic uses derby db (jdbc) for user and password storage/verification. Client invokes server logic via RMI and uses the outcome.
 
