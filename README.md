@@ -8,11 +8,13 @@
  
  <hr>
 
-Simple chat viewed with Swing, working with a simple server. Server logic uses derby db (jdbc) for user and password storage/verification. Client invokes server logic via RMI and uses the outcome.
+Simple chat viewed with Swing, working with a simple server. Server logic uses derby db (jdbc) for user and password storage/verification. Client invokes server logic via RMI and uses the outcome. Project was created and developed with Maven.
 
 Security issues are backed up by <b>PKBDF2 algorithm</b>. It's implementation is based on jtan189's <a href="https://gist.github.com/jtan189/3804290">Java PKBDF2 Password Hashing Code</a>
 
-Login client itself contains "login" field, "password" field, "login" button and "create new user" label. Both login and password field have implemented FocusListener which provides hint of the desired content.
+Login window itself contains "login" field, "password" field, "login" button and "create new user" label. Both login and password field have implemented FocusListener which provides hint of the desired content.
+
+Create user window on the other hand consists of one "login" field to define new user login, and two password fields to define password for newly created user. The second one is to assure, that there is no mistake in typing and that the password is not a random input.
 
 
  <b>HOW TO RUN IT</b>
