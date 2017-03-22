@@ -7,6 +7,10 @@
  - implementation of few additional features (more complex layout in GUI, other rooms, maybe file attachment option)
  
  <hr>
+ 
+ <b>HOW TO RUN IT</b>
+ 
+This program is (by now, for test purposes) configured to run on "localhost". First you need to run "MyServer" In order to manage requests of future clients.
 
 Simple chat viewed with Swing, working with a simple server. Server logic uses derby db (jdbc) for user and password storage/verification. Client invokes server logic via RMI and uses the outcome.
 
