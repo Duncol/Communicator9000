@@ -7,16 +7,25 @@
  - implementation of few additional features (more complex layout in GUI, other rooms, maybe file attachment option)
  
  <hr>
- 
- <b>HOW TO RUN IT</b>
- 
-This program is (by now, for test purposes) configured to run on "localhost". First you need to run "MyServer" In order to manage requests of future clients.
 
 Simple chat viewed with Swing, working with a simple server. Server logic uses derby db (jdbc) for user and password storage/verification. Client invokes server logic via RMI and uses the outcome.
 
 Security issues are backed up by <b>PKBDF2 algorithm</b>. It's implementation is based on jtan189's <a href="https://gist.github.com/jtan189/3804290">Java PKBDF2 Password Hashing Code</a>
 
 Login client itself contains "login" field, "password" field, "login" button and "create new user" label. Both login and password field have implemented FocusListener which provides hint of the desired content.
+
+
+ <b>HOW TO RUN IT</b>
+ 
+This program is (by now, for test purposes) configured to run on "localhost". First you need to run "MyServer" In order to manage requests of future clients. If server is established correctly, you should see few messages:
+- Server socket established (port binding phase)
+- Registry created! (RMI)
+- Derby SQL connection successfuly established (initiates jdbc driver, and tries to connect to given db; if it doesn't exist it creates new one
+- Table with a given name already exists. Let me use it (In this case given table inside db was already created, so it simply uses it. If there is no such table with a given name it creates a new one)
+- PassCheckService established! (RMI, used for login/password verification with db)
+- CreateUserService established! (RMI, used to create new user in db)
+- IsLoggedService established! (RMI, checks if given user (login) is loged already. We do not allow clones)
+- The gates has been opened... (mtehod socket.accept() starts and waits for new clients)
 
 <b>RUNTIME</b>
 
