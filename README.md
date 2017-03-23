@@ -27,9 +27,9 @@ This program is (by now, for test purposes) configured to run on "localhost". Fi
 - PassCheckService established! (RMI, used for login/password verification with db)
 - CreateUserService established! (RMI, used to create new user in db)
 - IsLoggedService established! (RMI, checks if given user (login) is loged already. We do not allow clones)
-- The gates has been opened... (mtehod socket.accept() starts and waits for new clients)
+- The gates has been opened... (method socket.accept() starts and awaits for new clients)
 
 <b>RUNTIME</b>
 
-Client login window verifies user's credentials (login and password) and can create new user in server-side db - both are managed by RMI. Only after this verification chat window is made, which connects to server side with a standard Java Socket/ServerSocket. Afterwards, new thread awaiting for new messages is initialized (BufferedReader) and a similar one - that sends new messages from that client to all clients - starts running on the server side.
-Client's chat window sends messages with a simple ActionListener when "Send" button is pressed. Message - along with sender's user name - goes to the server, where current time is appended. After that, server sends the message to all current users (user list is a static field with global access. That provides an up-to-date state when server-side sends a new message. When message is delivered via reader it is immediately appended to JTextArea.
+Client login window verifies user's credentials (login and password) and can create new user in server-side db - both are managed by RMI. Only after the verification - chat window is made - which connects to server side with a standard Java Socket/ServerSocket. Afterwards, new thread awaiting for new messages is initialized (BufferedReader) and a similar one - that sends new messages from that client to all clients - starts running on the server side.
+Client's chat window sends messages with a simple ActionListener when "Send" button is pressed. Message - along with sender's user name - goes to the server, where current time is appended. After that, server sends the message to all current users (user list is a static field ArrayList<PrintWriter> with global access. That provides an up-to-date state when server-side sends a new message. When message is delivered via reader it is immediately appended to JTextArea.
