@@ -4,6 +4,7 @@
 <b>TO-DO LIST:</b>
  - refactoring
  - debugging
+ - elimination of some "hard coded" settings like ip, ports etc. (toSpring())
  - implementation of few additional features (more complex layout in GUI, other rooms, maybe file attachment option)
  
  <hr>
@@ -32,4 +33,4 @@ This program is (by now, for test purposes) configured to run on "localhost". Fi
 <b>RUNTIME</b>
 
 Client login window verifies user's credentials (login and password) and can create new user in server-side db - both are managed by RMI. Only after the verification - chat window is made - which connects to server side with a standard Java Socket/ServerSocket. Afterwards, new thread awaiting for new messages is initialized (BufferedReader) and a similar one - that sends new messages from that client to all clients - starts running on the server side.
-Client's chat window sends messages with a simple ActionListener when "Send" button is pressed. Message - along with sender's user name - goes to the server, where current time is appended. After that, server sends the message to all current users (user list is a static field ArrayList<PrintWriter> with global access. That provides an up-to-date state when server-side sends a new message. When message is delivered via reader it is immediately appended to JTextArea.
+Client's chat window sends messages with a simple ActionListener when "Send" button is pressed. Message - along with sender's user name - goes to the server, where current time is appended. After that, server sends the message to all current users (user list is a static field ArrayList of PrintWriters with global access. That provides an up-to-date state when server-side sends a new message). When message is delivered via reader it is immediately appended to JTextArea.
