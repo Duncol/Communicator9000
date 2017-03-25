@@ -28,7 +28,7 @@ public class ChatGUI extends GUI{
 	
 	public ChatGUI(String user){
 		this.user = user;
-		this.conMan = new ConnectionManager("192.168.0.104", 8080);
+		this.conMan = new ConnectionManager("127.0.0.1", 8081);
 		writer = conMan.getWriter();
 		reader = conMan.getReader();
 		establishGUI("Communicator9000 - Logged as: " + user);
