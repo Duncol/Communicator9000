@@ -6,7 +6,7 @@ import com.duncol.rmi.RMIManager;
 public class ServerMain {
 	private static ServerClientConnector connector;
 	static{
-		connector = new ServerClientConnector(8080);
+		connector = new ServerClientConnector(8081);
 	}
 	
 	public static void main(String[] args) {
