@@ -20,7 +20,7 @@ public class CreateUserService extends UnicastRemoteObject implements RemoteServ
 		this.passAss = new PasswordAssistant("PBKDF2WithHmacSHA1");
 	}
 	
-	public static synchronized CreateUserService getServiceFor(String dbName){
+	public static synchronized CreateUserService prepareServiceFor(String dbName){
 		if (service == null){
 			try{
 				service = new CreateUserService(dbName);
@@ -48,8 +48,8 @@ public class CreateUserService extends UnicastRemoteObject implements RemoteServ
 			String[] saltHash = passAss.createHashWithSalt(pass);
 			String salt = saltHash[1];
 			String hash = saltHash[0];
-			usersDAO.createUser(name, salt, hash);
-			return true;
+			boolean status = usersDAO.createUser(name, salt, hash);
+			return status;
 		}
 		catch (Exception ex){
 			ex.printStackTrace();

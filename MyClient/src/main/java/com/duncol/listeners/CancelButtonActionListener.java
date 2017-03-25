@@ -13,6 +13,7 @@ public class CancelButtonActionListener implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent ae){
+		frame.setVisible(false);
 		frame.dispose();
 	}
 }

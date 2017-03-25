@@ -4,13 +4,14 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
 import com.duncol.rmi.services.CreateUserService;
+import com.duncol.rmi.services.IsLoggedService;
 import com.duncol.rmi.services.PassCheckService;
 
 public class RMIManager {
 	private static RMIManager manager;
 	
 	private RMIManager(){
-		runRMIRegistry();
+		launchRMIRegistry();
 		launchRMIServices();
 	}
 	
@@ -23,7 +24,7 @@ public class RMIManager {
 		}
 	}
 	
-	private void runRMIRegistry(){
+	private void launchRMIRegistry(){
 		try{
 			LocateRegistry.createRegistry(1099);
 			System.out.println("Registry created!");
@@ -35,6 +36,7 @@ public class RMIManager {
 	
 	private void launchRMIServices(){
 		PassCheckService.prepareServiceFor("chatusers");
-		CreateUserService.getServiceFor("chatusers");
+		CreateUserService.prepareServiceFor("chatusers");
+		IsLoggedService.prepareServiceFor("chatusers");
 	}
 }

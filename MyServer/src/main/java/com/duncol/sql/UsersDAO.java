@@ -1,10 +1,8 @@
 package com.duncol.sql;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -18,6 +16,10 @@ public class UsersDAO{
 	
 	//toSpring();
 	private UsersDAO(String dbName){
+		initConnection(dbName);
+	}
+
+	private void initConnection(String dbName) {
 		try{
 			this.con = DerbyConnectionManager.getConnectionWith(dbName);
 			//dropTable("Users");
@@ -39,9 +41,9 @@ public class UsersDAO{
 		try{
 			PreparedStatement ps = this.con.prepareStatement(
 											"CREATE TABLE " + tableName + "("
-										+ " Name VARCHAR(30),"
-										+ " HashedPass VARCHAR(48),"
-										+ " PassSalt VARCHAR(48))");
+										+ " Name VARCHAR(30) PRIMARY KEY,"
+										+ " HashedPass VARCHAR(48) NOT NULL,"
+										+ " PassSalt VARCHAR(48) NOT NULL)");
 			ps.execute();
 			System.out.println("Table '" + tableName + "' created");
 		}
@@ -50,10 +52,13 @@ public class UsersDAO{
 				System.out.println(
 					"Table with a given name already exists. Let me use it");
 			}
+			else{
+				ex.printStackTrace();
+			}
 		}
 	}
 	
-	public void createUser(String name, String salt, String hashPass){
+	public boolean createUser(String name, String salt, String hashPass){
 		try{
 			PreparedStatement ps = this.con.prepareStatement(
 					"INSERT INTO Users(" 
@@ -64,9 +69,16 @@ public class UsersDAO{
 			ps.setString(3, salt);
 			ps.execute();
 			System.out.println("User " + name + " created successfuly!");
+			return true;
 		}
 		catch (SQLException ex){
-			ex.printStackTrace();
+			if (ex.getSQLState().equals("23505")){
+				System.out.println("User with a given name already exists");
+			}
+			else{
+				ex.printStackTrace();
+			}
+			return false;
 		}
 	}
 	

@@ -1,10 +1,7 @@
 package com.duncol.guis;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.swing.JButton;
@@ -15,6 +12,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
+import com.duncol.runnable.IncomingMessageThread;
 import com.duncol.clients.ConnectionManager;
 import com.duncol.listeners.SendButtonActionListener;
 
@@ -30,11 +28,12 @@ public class ChatGUI extends GUI{
 	
 	public ChatGUI(String user){
 		this.user = user;
-		this.conMan = new ConnectionManager("127.0.0.1", 8080);
+		this.conMan = new ConnectionManager("192.168.0.104", 8080);
 		writer = conMan.getWriter();
 		reader = conMan.getReader();
-		establishGUI("Communicator9000");
-		new Thread(new IncomingMessageThread()).start();
+		establishGUI("Communicator9000 - Logged as: " + user);
+		new Thread(new IncomingMessageThread(reader, msgArea))
+						.start();
 	}
 	
 	@Override
@@ -128,36 +127,5 @@ public class ChatGUI extends GUI{
 				new SendButtonActionListener(user, writer, msgInput));
 		panel.add(sendButton);
 		panel.add(this.msgArea);
-	}
-	
-	class IncomingMessageThread implements Runnable{
-		public void run() {
-			waitForMessages();
-		}
-		
-		private void waitForMessages(){
-			while (true){
-				checkAndSend();
-			}
-		}
-		
-		private synchronized void checkAndSend(){
-			String msg;
-			try{
-				msg = reader.readLine();
-				while (checkMsg(msg)){
-					System.out.println("Message recieved: '" + msg + "'");
-					msgArea.append(msg + "\n");
-					msg = "";
-				}	
-			}
-			catch (IOException ex){
-				ex.printStackTrace();
-			}
-		}
-		
-		private boolean checkMsg(String msg){
-			return msg != null && !msg.equals("");
-		}
 	}
 }

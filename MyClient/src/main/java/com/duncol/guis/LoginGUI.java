@@ -2,9 +2,12 @@ package com.duncol.guis;
 
 import com.duncol.listeners.CreateUserMouseListener;
 import com.duncol.listeners.LoginButtonActionListener;
+import com.duncol.listeners.key.EnterPressedKeyListener;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,10 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 
 public class LoginGUI extends GUI{
-	private String user;
-	private boolean access;
 	private JFrame frame;
 	private JPanel topPanel;
 	private JPanel botPanel;
@@ -25,7 +27,6 @@ public class LoginGUI extends GUI{
 	private JLabel createUserLabel;
 	
 	public LoginGUI(){
-		access = false;
 		establishGUI("Login to: Communicator9000");
 	}
 	
@@ -90,28 +91,27 @@ public class LoginGUI extends GUI{
 		this.frame.dispose();
 	}
 	
-	public void setAccess(boolean access){
-		this.access = access;
-	}
-	
-	public boolean checkAccess(){
-		return access;
-	}
-	
 	public String getLogin(){
 		return loginInput.getText();
 	}
 	
 	public char[] getPassword(){
-		char[] pass = passInput.getPassword();
-		return pass;
+		return passInput.getPassword();
 	}
 	
-	public void setUser(String login){
-		this.user = login;
+	public void resetLoginField(){
+		this.loginInput.setForeground(Color.GRAY);
+		this.loginInput.setText("Login");
 	}
 	
-	public void clearPassInput(){
-		this.passInput.repaint();
+	public void resetPassField(){
+		this.passInput.setForeground(Color.GRAY);
+		this.passInput.setEchoChar((char)0);
+		this.passInput.setText("Password");
+	}
+	
+	public void resetAllFields(){
+		resetLoginField();
+		resetPassField();
 	}
 }

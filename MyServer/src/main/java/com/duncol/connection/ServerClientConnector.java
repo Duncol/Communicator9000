@@ -60,10 +60,4 @@ public class ServerClientConnector {
 				new WaitAndSendToAllFrom(client))
 					.start();
 	}
-	
-	private void disposeWriters() {
-		for (PrintWriter s : writers){
-			s.close();
-		}
-	}
 }

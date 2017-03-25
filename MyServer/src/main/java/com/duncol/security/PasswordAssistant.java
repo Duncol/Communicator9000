@@ -11,21 +11,21 @@ import java.util.Arrays;
 
 public class PasswordAssistant{
 	
-    private final String PBKDF2_ALGORITHM;
+    private final String ALGORITHM;
 
     private final int SALT_BYTES = 24;
     private final int HASH_BYTES = 24;
-    private final int PBKDF2_ITERATIONS = 1000;
+    private final int ITERATIONS = 1000;
     
     public PasswordAssistant(String algName){
-    	PBKDF2_ALGORITHM = algName;
+    	ALGORITHM = algName;
     }
     
     public String[] createHashWithSalt(char[] password){
     	String[] saltHash = new String[2];
     	try{
     		byte[] salt = generateSalt();
-    		byte[] hash = pbkdf2(password, salt, PBKDF2_ITERATIONS, HASH_BYTES);
+    		byte[] hash = pbkdf2(password, salt, ITERATIONS, HASH_BYTES);
             
             saltHash[0] = toHex(salt);
             saltHash[1] = toHex(hash);
@@ -62,11 +62,25 @@ public class PasswordAssistant{
         return diff == 0;
     }
     
+    private byte[] hash(char[] pass, byte[] salt){
+    	byte[] hash = new byte[HASH_BYTES];
+    	try{
+    		hash = pbkdf2(pass, salt, ITERATIONS, HASH_BYTES);
+    	}
+    	catch (NoSuchAlgorithmException ex){
+    		ex.printStackTrace();
+    	}
+    	catch(InvalidKeySpecException ex2){
+    		ex2.printStackTrace();
+    	}
+    	return hash;
+    }
+    
     private byte[] pbkdf2(char[] password, byte[] salt, int iterations, int bytes)
         throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         PBEKeySpec spec = new PBEKeySpec(password, salt, iterations, bytes * 8);
-        SecretKeyFactory skf = SecretKeyFactory.getInstance(PBKDF2_ALGORITHM);
+        SecretKeyFactory skf = SecretKeyFactory.getInstance(ALGORITHM);
         return skf.generateSecret(spec).getEncoded();
     }
 
@@ -88,19 +102,5 @@ public class PasswordAssistant{
         else{
             return hex;
         }
-    }
-    
-    private byte[] hash(char[] pass, byte[] salt){
-    	byte[] hash = new byte[HASH_BYTES];
-    	try{
-    		hash = pbkdf2(pass, salt, PBKDF2_ITERATIONS, HASH_BYTES);
-    	}
-    	catch (NoSuchAlgorithmException ex){
-    		ex.printStackTrace();
-    	}
-    	catch(InvalidKeySpecException ex2){
-    		ex2.printStackTrace();
-    	}
-    	return hash;
     }
 }

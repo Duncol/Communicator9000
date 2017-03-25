@@ -6,14 +6,22 @@ import java.sql.DriverManager;
 public class DerbyConnectionManager{
 	private static Connection conn;
 	private static String dbURL;
-	private static String driver;
+	private static String dbName;
+	private final static String DRIVER;
+	static{
+		DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
+	}
 	
-	public static Connection getConnectionWith(String dbName){
-		if (conn == null){
-			dbURL = "jdbc:derby:" + dbName + ";create=true;";
-			driver = "org.apache.derby.jdbc.EmbeddedDriver";
+	public static Connection getConnectionWith(String db){
+		if (db != dbName){
+			if (conn != null){
+				closeConnection();
+			}
+			dbName = db;
+			dbURL = "jdbc:derby:" + db + ";create=true;";
+			
 			try{
-				Class.forName(driver);
+				Class.forName(DRIVER);
 				DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
 				conn = DriverManager.getConnection(dbURL);
 				System.out.println("Derby SQL connection successfuly established");
@@ -25,7 +33,7 @@ public class DerbyConnectionManager{
 		return conn;
 	}
 	
-	private static void closeConnection(){
+	public static void closeConnection(){
 		try{
 			if (!conn.isClosed()){
 				conn.close();

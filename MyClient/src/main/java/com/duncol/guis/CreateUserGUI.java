@@ -1,10 +1,10 @@
 package com.duncol.guis;
 
-import com.duncol.containers.InputFieldsContainer;
 import com.duncol.listeners.CancelButtonActionListener;
 import com.duncol.listeners.CreateButtonActionListener;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -54,6 +54,7 @@ public class CreateUserGUI extends GUI{
 		topPanel.add(this.loginInput);
 		topPanel.add(this.passInput);
 		topPanel.add(this.verifyPassInput);
+		
 		botPanel.add(this.createButton);
 		botPanel.add(this.cancelButton);
 	}
@@ -82,19 +83,55 @@ public class CreateUserGUI extends GUI{
 	
 	private JButton makeCreateButton(){
 		JButton createButton = new JButton("Create");
-  		createButton.addActionListener(makeCreateButtonListener());
+  		createButton.addActionListener(new CreateButtonActionListener(this));
   		return createButton;
 	}
 	
-	public void addMessage(String m){
-		// GUI interface necessary "implementation" (a.k.a nothing)
+	public JDialog getFrame(){
+		return this.frame;
+	}
+
+	public String getLogin() {
+		return loginInput.getText();
+	}
+
+	public void setLoginInput(JTextField loginInput) {
+		this.loginInput = loginInput;
+	}
+
+	public char[] getPass() {
+		return passInput.getPassword();
+	}
+
+	public void setPassInput(JPasswordField passInput) {
+		this.passInput = passInput;
+	}
+
+	public char[] getVerifyPass() {
+		return verifyPassInput.getPassword();
+	}
+
+	public void setVerifyPassInput(JPasswordField verifyPassInput) {
+		this.verifyPassInput = verifyPassInput;
 	}
 	
-	private InputFieldsContainer packInputFields(){
-		return new InputFieldsContainer(loginInput, passInput, verifyPassInput);
+	public void resetLoginField(){
+		this.loginInput.setForeground(Color.GRAY);
+		this.loginInput.setText("Login");
 	}
 	
-	private CreateButtonActionListener makeCreateButtonListener(){
-		return new CreateButtonActionListener(packInputFields());
+	public void resetPassFields(){
+		this.passInput.setForeground(Color.GRAY);
+		this.passInput.setEchoChar((char)0);
+		this.passInput.setText("Password");
+		
+		this.verifyPassInput.setEchoChar((char)0);
+		this.verifyPassInput.setForeground(Color.GRAY);
+		this.verifyPassInput.setText("Repeat Password");
+	}
+	
+	public void resetAllFields(){
+		resetLoginField();
+		resetPassFields();
 	}
 }

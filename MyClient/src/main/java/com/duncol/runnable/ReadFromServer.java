@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import com.duncol.clients.ConnectionManager;
 import com.duncol.guis.ChatGUI;
-import com.duncol.guis.LoginGUI;
 
 class ReadFromServer implements Runnable{
 	private ChatGUI chat;

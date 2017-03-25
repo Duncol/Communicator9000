@@ -9,7 +9,7 @@ import java.net.Socket;
 import java.text.SimpleDateFormat;
 
 public class WaitAndSendToAllFrom implements Runnable{
-		BufferedReader reader;
+		private BufferedReader reader;
 		
 		public WaitAndSendToAllFrom(Socket clientSocket){
 			try{
