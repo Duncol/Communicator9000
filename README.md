@@ -20,7 +20,11 @@ Create user window on the other hand consists of one "login" field to define new
 
  <b>HOW TO RUN IT</b>
  
-This program is managed and build with Maven. It uses Maven Shade Plugin, to pack program itself and all it's dependencies into one uber-jar. To run it you need to download the projects and in Eclipse: Run As -> Maven build... (goal "package"). It will produce a jar file inside "target" directory. To run it, open project containing dir and type in terminal: "java -cp [name-of-jar]".
+This program is managed and build with Maven. It uses Maven Shade Plugin, to pack program itself and all it's dependencies into one uber-jar. To run it you need to download the projects and in Eclipse: Run As -> Maven build... (goal "package") or just type in terminal:
+<blockquote>mvn compile
+mvn package</blockquote> 
+It will produce a jar file inside "target" directory. To run it, open project containing dir and type in terminal: 
+<blockquote>java -cp [name-of-jar]</blockquote>
 By now, for test purposes, it is configured to run on "localhost". First you need to run "MyServer" in order to manage requests of future clients. If server is established correctly, you should see few messages:
 - "Server socket established" (port binding phase)
 - "Registry created!" (RMI)
