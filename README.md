@@ -20,15 +20,15 @@ Create user window on the other hand consists of one "login" field to define new
 
  <b>HOW TO RUN IT</b>
  
-This program is (by now, for test purposes) configured to run on "localhost". First you need to run "MyServer" In order to manage requests of future clients. If server is established correctly, you should see few messages:
-- Server socket established (port binding phase)
-- Registry created! (RMI)
-- Derby SQL connection successfuly established (initiates jdbc driver, and tries to connect to given db; if it doesn't exist it creates new one
-- Table with a given name already exists. Let me use it (In this case given table inside db was already created, so it simply uses it. If there is no such table with a given name it creates a new one)
-- PassCheckService established! (RMI, used for login/password verification with db)
-- CreateUserService established! (RMI, used to create new user in db)
-- IsLoggedService established! (RMI, checks if given user (login) is loged already. We do not allow clones)
-- The gates has been opened... (method socket.accept() starts and awaits for new clients)
+This program is managed and build with Maven. It uses Maven Shade Plugin, to pack program itself and all it's dependencies into one uber-jar. To run it you need to download the projects and in Eclipse: Run As -> Maven build... (goal "package"). It will produce a jar file inside "target" directory. To run it, open project containing dir and type in terminal: "java -cp [name-of-jar] com.duncol.main.ServerMain". To run client do the same, just  By now, for test purposes, it is configured to run on "localhost". First you need to run "MyServer" in order to manage requests of future clients. If server is established correctly, you should see few messages:
+- "Server socket established" (port binding phase)
+- "Registry created!" (RMI)
+- "Derby SQL connection successfuly established" (initiates jdbc driver, and tries to connect to given db; if it doesn't exist it creates new one
+- "Table with a given name already exists. Let me use it" (In this case given table inside db was already created, so it simply uses it. If there is no such table with a given name it creates a new one)
+- "PassCheckService established!" (RMI, used for login/password verification with db)
+- "CreateUserService established!" (RMI, used to create new user in db)
+- "IsLoggedService established!" (RMI, checks if given user (login) is loged already. We do not allow clones)
+- "The gates has been opened..." (method socket.accept() starts and awaits for new clients)
 
 <b>RUNTIME</b>
 
