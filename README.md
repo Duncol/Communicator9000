@@ -20,8 +20,8 @@ Create user window on the other hand consists of one "login" field to define new
 
  <b>HOW TO RUN IT</b>
  
-This program is managed and build with Maven. It uses Maven Shade Plugin, to pack program itself and all it's dependencies into one uber-jar. To run it you need to download the projects and in Eclipse: Run As -> Maven build... (goal "package") or just type in terminal:
-<blockquote>mvn compile
+This program is managed and build with Maven. It uses Maven Shade Plugin, to pack program itself and all it's dependencies into one uber-jar. To run it you need to download the projects and in Eclipse: Run As -> Maven build... (goal "package") or just type in terminal in project's directory:
+<blockquote>mvn compile<br>
 mvn package</blockquote> 
 It will produce a jar file inside "target" directory. To run it, open project containing dir and type in terminal: 
 <blockquote>java -cp [name-of-jar]</blockquote>
