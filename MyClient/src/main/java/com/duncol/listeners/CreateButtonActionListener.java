@@ -41,7 +41,7 @@ public class CreateButtonActionListener implements ActionListener{
 	private void createUser(String user, char[] pass){
 		try{
 			RemoteService createUserService = 
-					(RemoteService) Naming.lookup("rmi://127.0.0.1:1099/createuser");
+					(RemoteService) Naming.lookup("rmi://192.168.0.104:1099/createuser");
 			boolean result = createUserService.run(user, pass);
 			if (result == false){
 				JOptionPane.showMessageDialog(

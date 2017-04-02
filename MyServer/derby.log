@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Fri Mar 31 19:51:01 CEST 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015b-257d-ee61-000006a75898 
+on database directory /home/duncol/Documents/workspace-sts-3.8.3.RELEASE/Communicator9000/MyServer/chatusers with class loader sun.misc.Launcher$AppClassLoader@3d4eac69 
+Loaded from file:/home/duncol/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_111-8u111-b14-2ubuntu0.16.04.2-b14
+user.dir=/home/duncol/Documents/workspace-sts-3.8.3.RELEASE/Communicator9000/MyServer
+os.name=Linux
+os.arch=amd64
+os.version=4.4.0-53-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
