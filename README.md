@@ -24,7 +24,7 @@ This program is managed and build with Maven. It uses Maven Shade Plugin, to pac
 <blockquote>mvn compile<br>
 mvn package</blockquote> 
 It will produce a jar file inside "target" directory. To run it, open project containing dir and type in terminal: 
-<blockquote>java -cp [name-of-jar]</blockquote>
+<blockquote>java [name-of-jar]</blockquote>
 By now, for test purposes, it is configured to run on "localhost". First you need to run "MyServer" in order to manage requests of future clients. If server is established correctly, you should see few messages:
 - "Server socket established" (port binding phase)
 - "Registry created!" (RMI)
